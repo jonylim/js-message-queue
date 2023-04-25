@@ -23,10 +23,11 @@ class JSMessageQueue {
     processNext(stopIfEmpty) {
         if (this.queue.length != 0) {
             this.callback(this.queue.shift());
-        } else if (!stopIfEmpty) {
-            setTimeout(() => {
-                this.processNext();
-            }, 100);
+            if (!stopIfEmpty) {
+                setTimeout(() => {
+                    this.processNext();
+                }, 1);
+            }
         } else {
             this.isRunning = false;
         }
